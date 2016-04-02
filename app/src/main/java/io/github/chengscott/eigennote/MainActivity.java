@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
         // query subjects
         Cursor cursor = dataHelper.getReadableDatabase()
                 .rawQuery("select id as _id, title from subject;", null);
-        MainCursorAdapter mainCursorAdapter = new MainCursorAdapter(MainActivity.this, cursor, 0);
+        MainCursorAdapter mainCursorAdapter =
+                new MainCursorAdapter(MainActivity.this, cursor, 0, MainCursorAdapter.Type.subject);
         subjectList.setAdapter(mainCursorAdapter);
-        cursor.close();
     }
 }

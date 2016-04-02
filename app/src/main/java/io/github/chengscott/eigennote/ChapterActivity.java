@@ -28,9 +28,9 @@ public class ChapterActivity extends AppCompatActivity {
         DataHelper dataHelper = new DataHelper(this);
         Cursor cursor = dataHelper.getReadableDatabase()
                 .rawQuery("select id as _id, title from chapter where subject_fk=?;", new String[]{title});
-        MainCursorAdapter mainCursorAdapter = new MainCursorAdapter(this, cursor, 0);
-        chapterList.setAdapter(mainCursorAdapter);
-        cursor.close();
+        MainCursorAdapter chapterCursorAdapter =
+                new MainCursorAdapter(this, cursor, 0, MainCursorAdapter.Type.chapter);
+        chapterList.setAdapter(chapterCursorAdapter);
         chapterAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

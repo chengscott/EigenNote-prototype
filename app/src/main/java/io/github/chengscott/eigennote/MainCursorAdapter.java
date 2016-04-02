@@ -7,12 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainCursorAdapter extends CursorAdapter {
+    public enum Type { subject, chapter }
+    private Type mType;
 
-    public MainCursorAdapter(Context context, Cursor cursor, int flags) {
+    public MainCursorAdapter(Context context, Cursor cursor, int flags, Type type) {
         super(context, cursor, flags);
+        mType = type;
     }
 
     @Override
@@ -33,7 +37,15 @@ public class MainCursorAdapter extends CursorAdapter {
             @Override
             public void onClick(View v) {
                 Context context = v.getContext();
-                Intent intent = new Intent(context, ChapterActivity.class);
+                Intent intent = null;
+                switch (mType) {
+                    case subject:
+                        intent = new Intent(context, ChapterActivity.class);
+                        break;
+                    case chapter:
+                        intent = new Intent(context, ImageActivity.class);
+                        break;
+                }
                 intent.putExtra("title", ((TextView) v).getText().toString());
                 context.startActivity(intent);
             }
