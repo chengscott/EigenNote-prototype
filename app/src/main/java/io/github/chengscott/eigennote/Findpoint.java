@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
@@ -13,8 +14,9 @@ import java.util.ArrayList;
  */
 public class Findpoint {
     ArrayList<Point> pointlist = new ArrayList();
-    int h,w;            //圖片長寬
+    int h, w;            //圖片長寬
     static Bitmap bmp;
+
     public byte[] Bitmap2Bytes(Bitmap bm) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.JPEG, 0, baos);
@@ -23,7 +25,7 @@ public class Findpoint {
 
     public void FindPoint(Context context) {
         Resources res = context.getResources();
-        bmp = BitmapFactory.decodeResource(res, R.drawable.j200);
+        bmp = null; // BitmapFactory.decodeResource(res, R.drawable.j200);
         Bitmap2Bytes(bmp);
         w = bmp.getWidth();
         h = bmp.getHeight();
@@ -119,35 +121,37 @@ public class Findpoint {
             }
         }
     }
-    public int topix(double pix){   //單位轉換
-        return (int)(pix*23.58);
-    }
-    public int topix(int pix){   //單位轉換
-        return (int)(((double)pix)*23.58);
+
+    public int topix(double pix) {   //單位轉換
+        return (int) (pix * 23.58);
     }
 
-    public int  getR(int x , int y){     //平均red值
-        int sum = 0;
-        for (int i = y ; i> y-5; i-=1){
-            sum = sum + Color.red(bmp.getPixel(x,i));
-        }
-        return sum/5;
+    public int topix(int pix) {   //單位轉換
+        return (int) (((double) pix) * 23.58);
     }
 
-    public int  getG(int x , int y){       //平均green值
+    public int getR(int x, int y) {     //平均red值
         int sum = 0;
-        for (int i = y ; i> y-5; i-=1){
-            sum = sum + Color.green(bmp.getPixel(x,i));
+        for (int i = y; i > y - 5; i -= 1) {
+            sum = sum + Color.red(bmp.getPixel(x, i));
         }
-        return sum/5;
+        return sum / 5;
     }
 
-    public int  getB(int x , int y){           //平均B值
+    public int getG(int x, int y) {       //平均green值
         int sum = 0;
-        for (int i = y ; i> y-5; i-=1){
-            sum = sum + Color.blue(bmp.getPixel(x,i));
+        for (int i = y; i > y - 5; i -= 1) {
+            sum = sum + Color.green(bmp.getPixel(x, i));
         }
-        return sum/5;
+        return sum / 5;
+    }
+
+    public int getB(int x, int y) {           //平均B值
+        int sum = 0;
+        for (int i = y; i > y - 5; i -= 1) {
+            sum = sum + Color.blue(bmp.getPixel(x, i));
+        }
+        return sum / 5;
     }
 
 }

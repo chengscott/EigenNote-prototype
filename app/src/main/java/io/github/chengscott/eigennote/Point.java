@@ -4,6 +4,8 @@ package io.github.chengscott.eigennote;
  * Created by Adam on 2016/4/2.
  */
 public class Point {
+    public enum Color {Black, Blue, Red}
+
     public int getX() {
         return x;
     }
@@ -44,9 +46,6 @@ public class Point {
         this.color = color;
     }
 
-
-    public enum Color {Black, Blue, Red}
-    Color color;
-    private int  x,y,width, height;
-
+    private Color color;
+    private int x, y, width, height;
 }
