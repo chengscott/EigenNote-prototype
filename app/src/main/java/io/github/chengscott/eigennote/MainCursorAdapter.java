@@ -16,7 +16,8 @@ public class MainCursorAdapter extends CursorAdapter {
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        return LayoutInflater.from(context).inflate(android.R.layout.simple_list_item_1, parent, false);
+        return LayoutInflater.from(context)
+                .inflate(android.R.layout.simple_list_item_1, parent, false);
     }
 
     @Override
@@ -27,5 +28,15 @@ public class MainCursorAdapter extends CursorAdapter {
         String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
         // Populate fields with extracted properties
         tvTitle.setText(title);
+        tvTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DataHelper dataHelper = new DataHelper(v.getContext());
+                Cursor cursor = dataHelper.getReadableDatabase()
+                        .rawQuery("select id as _id, title from chapter where subject_fk=?;",
+                                new String[]{((TextView) v).getText().toString()});
+                changeCursor(cursor);
+            }
+        });
     }
 }
