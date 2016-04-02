@@ -32,11 +32,11 @@ public class DataHelper extends SQLiteOpenHelper {
     private static final String CreateNoteTable = "CREATE TABLE IF NOT EXISTS `note` (" +
             " `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE," +
             " `image_fk` INTEGER NOT NULL," +
-            " `x` REAL," +
-            " `y` REAL," +
-            " `width` REAL," +
-            " `height` REAL," +
-            " `type` TEXT DEFAULT 'Point'," +
+            " `x` INTEGER," +
+            " `y` INTEGER," +
+            " `width` INTEGER," +
+            " `height` INTEGER," +
+            " `type` TEXT DEFAULT 'Theorem'," +
             " FOREIGN KEY(`image_fk`) REFERENCES `image`(`id`)" +
             ");";
 

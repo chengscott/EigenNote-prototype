@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainCursorAdapter extends CursorAdapter {
@@ -44,6 +43,7 @@ public class MainCursorAdapter extends CursorAdapter {
                         break;
                     case chapter:
                         intent = new Intent(context, ImageActivity.class);
+                        intent.putExtra("subject", ((ChapterActivity) v.getContext()).getTitle());
                         break;
                 }
                 intent.putExtra("title", ((TextView) v).getText().toString());
