@@ -1,8 +1,6 @@
 package io.github.chengscott.eigennote;
 
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +31,6 @@ public class ImageCardAdapter extends RecyclerView.Adapter<ImageCardAdapter.View
         mImages = images;
     }
 
-    // Create new views (invoked by the layout manager)
     @Override
     public ImageCardAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
@@ -45,12 +42,10 @@ public class ImageCardAdapter extends RecyclerView.Adapter<ImageCardAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
-        // holder.mTextView.setText(mDataset[position]);
         Note note = mNotes.get(position);
         viewHolder.typeText.setText(note.getType());
-        Bitmap bmp = Bitmap.createBitmap(mImages.get(note.getImage_fk()), note.getX(), note.getY(), note.getWidth(), note.getHeight());
+        Bitmap bmp = Bitmap.createBitmap(mImages.get(note.getImage_fk()),
+                note.getX(), note.getY(), note.getWidth(), note.getHeight());
         viewHolder.imageView.setImageBitmap(bmp);
     }
 

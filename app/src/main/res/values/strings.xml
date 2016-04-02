@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">EigenNote</string>
     <string name="title_activity_chapter">Chapter</string>
+    <string name="insert_chapter_title">New Chapter</string>
+    <string name="insert_chapter_confirm">Add</string>
+    <string name="insert_chapter_snackbar">%s Added!</string>
 </resources>

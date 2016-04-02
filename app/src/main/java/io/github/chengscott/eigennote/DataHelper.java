@@ -46,6 +46,7 @@ public class DataHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        db.execSQL("PRAGMA foreign_keys = \"1\";");
         db.execSQL(CreateSubjectTable);
         db.execSQL(CreateChapterTable);
         db.execSQL(CreateImageTable);
