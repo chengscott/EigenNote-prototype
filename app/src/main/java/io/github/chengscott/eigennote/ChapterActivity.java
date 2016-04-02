@@ -35,15 +35,17 @@ public class ChapterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 EditText editText = new EditText(view.getContext());
+                editText.setSingleLine();
                 editText.setId(R.id.chapterEditText);
                 final String subject = getTitle().toString();
                 new AlertDialog.Builder(view.getContext())
                         .setTitle(R.string.insert_chapter_title)
                         .setView(editText)
-                        .setPositiveButton(R.string.insert_chapter_confirm,
+                        .setPositiveButton(R.string.insert_confirm,
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialogInterface, int whichButton) {
                                         Dialog dialog = (Dialog) dialogInterface;
+                                        // insert new chapter
                                         String chapter = ((EditText) dialog
                                                 .findViewById(R.id.chapterEditText))
                                                 .getText()
@@ -56,7 +58,7 @@ public class ChapterActivity extends AppCompatActivity {
                                                 .insert("chapter", null, contentValues);
                                         // snackbar notification
                                         Snackbar.make(findViewById(R.id.chapterCoordinatorLayout),
-                                                String.format(getResources().getString(R.string.insert_chapter_snackbar), chapter),
+                                                String.format(getResources().getString(R.string.insert_snackbar), chapter),
                                                 Snackbar.LENGTH_SHORT)
                                                 .show();
                                         // reset adapter

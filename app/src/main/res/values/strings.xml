@@ -1,7 +1,13 @@
 <resources>
     <string name="app_name">EigenNote</string>
     <string name="title_activity_chapter">Chapter</string>
+    <string name="read_image">Read image</string>
+    <string name="insert_subject_title">New Subject</string>
     <string name="insert_chapter_title">New Chapter</string>
-    <string name="insert_chapter_confirm">Add</string>
-    <string name="insert_chapter_snackbar">%s Added!</string>
+    <string name="insert_confirm">Add</string>
+    <string name="insert_snackbar">%s Added!</string>
+    <string-array name="change_action">
+        <item>Rename</item>
+        <item>Delete</item>
+    </string-array>
 </resources>

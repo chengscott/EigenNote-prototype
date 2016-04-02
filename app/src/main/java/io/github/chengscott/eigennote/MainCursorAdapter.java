@@ -1,8 +1,10 @@
 package io.github.chengscott.eigennote;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +50,26 @@ public class MainCursorAdapter extends CursorAdapter {
                 }
                 intent.putExtra("title", ((TextView) v).getText().toString());
                 context.startActivity(intent);
+            }
+        });
+        tvTitle.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                new AlertDialog.Builder(v.getContext())
+                        .setTitle(((TextView) v).getText())
+                        .setItems(R.array.change_action, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                switch (mType) {
+                                    case subject:
+                                        break;
+                                    case chapter:
+                                        break;
+                                }
+                            }
+                        })
+                        .show();
+                return false;
             }
         });
     }
