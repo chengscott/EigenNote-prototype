@@ -10,6 +10,8 @@
     tools:context="io.github.chengscott.eigennote.MainActivity">
 
     <TextView
+        android:id="@+id/tv"
+        android:textSize="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!" />
