@@ -1,6 +1,7 @@
 package io.github.chengscott.eigennote;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,11 +32,10 @@ public class MainCursorAdapter extends CursorAdapter {
         tvTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DataHelper dataHelper = new DataHelper(v.getContext());
-                Cursor cursor = dataHelper.getReadableDatabase()
-                        .rawQuery("select id as _id, title from chapter where subject_fk=?;",
-                                new String[]{((TextView) v).getText().toString()});
-                changeCursor(cursor);
+                Context context = v.getContext();
+                Intent intent = new Intent(context, ChapterActivity.class);
+                intent.putExtra("title", ((TextView) v).getText().toString());
+                context.startActivity(intent);
             }
         });
     }
