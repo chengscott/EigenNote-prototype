@@ -3,6 +3,10 @@ package io.github.chengscott.eigennote;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -16,9 +20,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     private ListView subjectList;
     private FloatingActionButton subjectAdd;
+    private final int PICK_FROM_FILE = 0x1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,12 +87,34 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.readImage:
-                // TODO: adam
+                startActivityForResult(
+                        Intent.createChooser(
+                                new Intent(Intent.ACTION_GET_CONTENT)
+                                        .setType("image/*"), getString(R.string.import_image)),
+                        PICK_FROM_FILE);
                 return true;
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PICK_FROM_FILE) {
+            if (resultCode == RESULT_OK) {
+                Uri selectedImage = data.getData();
+                // String filePath = new File(selectedImage.getPath()).getAbsolutePath();
+                Bitmap bitmap = null;
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Findpoint points = new Findpoint();
+                points.FindPoint(bitmap);
+            }
         }
     }
 }

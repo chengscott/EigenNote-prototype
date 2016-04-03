@@ -1,9 +1,6 @@
 package io.github.chengscott.eigennote;
 
-import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 
 import java.io.ByteArrayOutputStream;
@@ -13,9 +10,9 @@ import java.util.ArrayList;
  * Created by Adam on 2016/4/2.
  */
 public class Findpoint {
-    ArrayList<Point> pointlist = new ArrayList();
-    int h, w;            //圖片長寬
-    static Bitmap bmp;
+    public ArrayList<Point> pointlist = new ArrayList();
+    private int h, w;            //圖片長寬
+    private Bitmap bmp;
 
     public byte[] Bitmap2Bytes(Bitmap bm) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -23,9 +20,8 @@ public class Findpoint {
         return baos.toByteArray();
     }
 
-    public void FindPoint(Context context) {
-        Resources res = context.getResources();
-        bmp = null; // BitmapFactory.decodeResource(res, R.drawable.j200);
+    public void FindPoint(Bitmap bitmap) {
+        bmp = Bitmap.createBitmap(bitmap);
         Bitmap2Bytes(bmp);
         w = bmp.getWidth();
         h = bmp.getHeight();

@@ -17,4 +17,5 @@
     <string name="delete_confirm">Delete</string>
     <string name="delete_cancel">Cancel</string>
     <string name="delete_snackbar">Deleted!</string>
+    <string name="import_image">Choose an image</string>
 </resources>

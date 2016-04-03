@@ -49,8 +49,11 @@ public class ImageActivity extends AppCompatActivity {
         }
         // read image
         String[] arr_images_fk = images_fk.toArray(new String[0]);
-        cursor = dataHelper.getReadableDatabase()
-                .rawQuery("select id as _id, image from image where id in (" + makePlaceholders(images_fk.size()) + ");", arr_images_fk);
+        cursor = null;
+        if (images_fk.size() != 0) {
+            cursor = dataHelper.getReadableDatabase()
+                    .rawQuery("select id as _id, image from image where id in (" + makePlaceholders(images_fk.size()) + ");", arr_images_fk);
+        }
         if (cursor != null) {
             while (cursor.moveToNext()) {
                 byte[] data = cursor.getBlob(cursor.getColumnIndex("image"));
