@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/readImage"
-        android:icon="@android:drawable/ic_input_add"
+        android:icon="@drawable/ic_add_to_photos_white_24dp"
         android:title="@string/read_image"
         app:showAsAction="ifRoom" />
 </menu>

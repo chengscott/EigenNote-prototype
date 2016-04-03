@@ -4,16 +4,23 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ImageActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
+    private final int PICK_FROM_FILE = 0x1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,5 +82,47 @@ public class ImageActivity extends AppCompatActivity {
             sb.append(", ?");
         }
         return sb.toString();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.readImage:
+                startActivityForResult(
+                        Intent.createChooser(
+                                new Intent(Intent.ACTION_GET_CONTENT)
+                                        .setType("image/*"), getString(R.string.import_image)),
+                        PICK_FROM_FILE);
+                return true;
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PICK_FROM_FILE) {
+            if (resultCode == RESULT_OK) {
+                Uri selectedImage = data.getData();
+                // String filePath = new File(selectedImage.getPath()).getAbsolutePath();
+                Bitmap bitmap = null;
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Findpoint points = new Findpoint();
+                points.FindPoint(bitmap);
+            }
+        }
     }
 }
