@@ -40,7 +40,7 @@ public class Findpoint {
                         Point point = new Point();
                         point.setColor(Point.Color.Black);
                         point.setX(23);
-                        point.setY(i / 3);        //傳回X,Y,寬
+                        point.setY(i);        //傳回X,Y,寬
                         point.setWidth(topix(10.4));
                         int up = i;
                         for (i = i + topix(1.5); i < h; i++) {     //判斷下一個黑點
@@ -55,7 +55,7 @@ public class Findpoint {
                                 blevel = R + G + B;
                             }
                             if (blevel < 300) {       //下一個黑色位置
-                                point.setHeight((i - up) / 3);      //傳回高
+                                point.setHeight((i - up));      //傳回高
                                 pointlist.add(point);
                                 i = i + topix(1.5);
                                 break;
@@ -65,7 +65,7 @@ public class Findpoint {
                         Point point = new Point();
                         point.setColor(Point.Color.Blue);
                         point.setX(23);
-                        point.setY(i / 3);        //傳回X,Y,寬
+                        point.setY(i);        //傳回X,Y,寬
                         point.setWidth(topix(10.4));
                         int up = i;
                         for (i = i + topix(1.5); i < h; i++) {     //判斷下一個藍點
@@ -80,7 +80,7 @@ public class Findpoint {
                                 blevel = R + G + B;
                             }
                             if (B > R && B > G) {       //下一個藍色位置
-                                point.setHeight((i - up) / 3);      //傳回高
+                                point.setHeight((i - up));      //傳回高
                                 pointlist.add(point);
                                 i = i + topix(1.5);
                                 break;
@@ -90,7 +90,7 @@ public class Findpoint {
                         Point point = new Point();
                         point.setColor(Point.Color.Red);
                         point.setX(23);
-                        point.setY(i / 3);        //傳回X,Y,寬
+                        point.setY(i);        //傳回X,Y,寬
                         point.setWidth(topix(10.4));
                         int up = i;
                         for (i = i + topix(1.5); i < h; i++) {     //判斷下一個紅點
@@ -105,7 +105,7 @@ public class Findpoint {
                                 blevel = R + G + B;
                             }
                             if (R > B && R > G) {       //下一個紅色位置
-                                point.setHeight((i - up) / 3);          //傳回高
+                                point.setHeight((i - up));          //傳回高
                                 pointlist.add(point);
                                 i = i + topix(1.5);
                                 break;
@@ -119,11 +119,11 @@ public class Findpoint {
     }
 
     public int topix(double pix) {   //單位轉換
-        return (int) (pix * 23.58);
+        return (int) (pix * 7.86);
     }
 
     public int topix(int pix) {   //單位轉換
-        return (int) (((double) pix) * 23.58);
+        return (int) (((double) pix) * 7.86);
     }
 
     public int getR(int x, int y) {     //平均red值
