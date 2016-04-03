@@ -46,7 +46,6 @@ public class DataHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("PRAGMA foreign_keys = \"1\";");
         db.execSQL(CreateSubjectTable);
         db.execSQL(CreateChapterTable);
         db.execSQL(CreateImageTable);
@@ -56,5 +55,13 @@ public class DataHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onCreate(db);
+    }
+
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        super.onOpen(db);
+        if (!db.isReadOnly()) {
+            db.execSQL("PRAGMA foreign_keys=ON;");
+        }
     }
 }

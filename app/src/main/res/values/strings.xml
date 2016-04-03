@@ -10,4 +10,11 @@
         <item>Rename</item>
         <item>Delete</item>
     </string-array>
+    <string name="rename_title">Rename</string>
+    <string name="rename_confirm">Change</string>
+    <string name="rename_snackbar">Renamed as %s!</string>
+    <string name="delete_title">Delete</string>
+    <string name="delete_confirm">Delete</string>
+    <string name="delete_cancel">Cancel</string>
+    <string name="delete_snackbar">Deleted!</string>
 </resources>

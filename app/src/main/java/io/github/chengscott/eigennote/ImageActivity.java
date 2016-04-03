@@ -35,13 +35,15 @@ public class ImageActivity extends AppCompatActivity {
         if (cursor != null) {
             while (cursor.moveToNext()) {
                 notes.add(new Note(
-                        cursor.getInt(3),
-                        cursor.getInt(4),
-                        cursor.getInt(5),
-                        cursor.getInt(6),
-                        cursor.getString(7),
-                        cursor.getInt(2)));
-                images_fk.add(String.valueOf(cursor.getInt(1)));
+                                cursor.getInt(cursor.getColumnIndex("x")),
+                                cursor.getInt(cursor.getColumnIndex("y")),
+                                cursor.getInt(cursor.getColumnIndex("width")),
+                                cursor.getInt(cursor.getColumnIndex("height")),
+                                cursor.getString(cursor.getColumnIndex("type")),
+                                cursor.getInt(cursor.getColumnIndex(("image_fk")))
+                        )
+                );
+                images_fk.add(String.valueOf(cursor.getInt(cursor.getColumnIndex(("image_fk")))));
             }
             cursor.close();
         }
@@ -51,8 +53,9 @@ public class ImageActivity extends AppCompatActivity {
                 .rawQuery("select id as _id, image from image where id in (" + makePlaceholders(images_fk.size()) + ");", arr_images_fk);
         if (cursor != null) {
             while (cursor.moveToNext()) {
-                byte[] data = cursor.getBlob(1);
-                images.put(cursor.getInt(0), BitmapFactory.decodeByteArray(data, 0, data.length));
+                byte[] data = cursor.getBlob(cursor.getColumnIndex("image"));
+                images.put(cursor.getInt(cursor.getColumnIndex("_id")),
+                        BitmapFactory.decodeByteArray(data, 0, data.length));
             }
             cursor.close();
         }

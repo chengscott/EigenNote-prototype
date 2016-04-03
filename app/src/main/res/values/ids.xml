@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <item name="tagID" type="id" />
+    <item name="tagTitle" type="id" />
+    <item name="renameEditText" type="id" />
     <item name="subjectEditText" type="id" />
     <item name="chapterEditText" type="id" />
 </resources>
