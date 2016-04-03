@@ -42,11 +42,11 @@ public class MainCursorAdapter extends CursorAdapter {
         // Populate fields with extracted properties
         tvTitle.setText(title);
         ///
-        tvTitle.setTag(R.id.tagID, cursor.getString(cursor.getColumnIndex("_id")));
-        try {
+        // tvTitle.setTag(R.id.tagID, cursor.getString(cursor.getColumnIndex("_id")));
+        /*try {
             tvTitle.setTag(R.id.tagTitle, ((AppCompatActivity) view.getContext()).getTitle());
         } catch (Exception e) {
-        }
+        }*/
         ///
         tvTitle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +59,7 @@ public class MainCursorAdapter extends CursorAdapter {
                         break;
                     case chapter:
                         intent = new Intent(context, ImageActivity.class);
-                        intent.putExtra("subject", v.getTag(R.id.tagTitle).toString());
+                        intent.putExtra("subject", ((ChapterActivity) v.getContext()).getTitle());// v.getTag(R.id.tagTitle).toString());
                         break;
                 }
                 intent.putExtra("title", ((TextView) v).getText().toString());
@@ -67,7 +67,7 @@ public class MainCursorAdapter extends CursorAdapter {
             }
         });
         // rename or delete
-        tvTitle.setOnLongClickListener(new View.OnLongClickListener() {
+        /*tvTitle.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 final AppCompatActivity activity = (AppCompatActivity) v.getContext();
@@ -147,6 +147,6 @@ public class MainCursorAdapter extends CursorAdapter {
                         .show();
                 return false;
             }
-        });
+        });*/
     }
 }

@@ -41,9 +41,9 @@ public class Findpoint {
                         point.setColor(Point.Color.Black);
                         point.setX(23);
                         point.setY(i);        //傳回X,Y,寬
-                        point.setWidth(topix(10.4));
+                        point.setWidth(topix(104));
                         int up = i;
-                        for (i = i + topix(1.5); i < h; i++) {     //判斷下一個黑點
+                        for (i = up + topix(1.5); i < h; i++) {     //判斷下一個黑點
                             R = Color.red((bmp.getPixel(topix(start), i)));
                             G = Color.green((bmp.getPixel(topix(start), i)));
                             B = Color.blue((bmp.getPixel(topix(start), i)));
@@ -66,9 +66,9 @@ public class Findpoint {
                         point.setColor(Point.Color.Blue);
                         point.setX(23);
                         point.setY(i);        //傳回X,Y,寬
-                        point.setWidth(topix(10.4));
+                        point.setWidth(topix(104));
                         int up = i;
-                        for (i = i + topix(1.5); i < h; i++) {     //判斷下一個藍點
+                        for (i = up + topix(1.5); i < h; i++) {     //判斷下一個藍點
                             R = Color.red((bmp.getPixel(topix(start), i)));
                             G = Color.green((bmp.getPixel(topix(start), i)));
                             B = Color.blue((bmp.getPixel(topix(start), i)));
@@ -91,9 +91,9 @@ public class Findpoint {
                         point.setColor(Point.Color.Red);
                         point.setX(23);
                         point.setY(i);        //傳回X,Y,寬
-                        point.setWidth(topix(10.4));
+                        point.setWidth(topix(104));
                         int up = i;
-                        for (i = i + topix(1.5); i < h; i++) {     //判斷下一個紅點
+                        for (i = up + topix(1.5); i < h; i++) {     //判斷下一個紅點
                             R = Color.red((bmp.getPixel(topix(start), i)));
                             G = Color.green((bmp.getPixel(topix(start), i)));
                             B = Color.blue((bmp.getPixel(topix(start), i)));

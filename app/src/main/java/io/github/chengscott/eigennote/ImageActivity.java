@@ -1,5 +1,6 @@
 package io.github.chengscott.eigennote;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -21,6 +22,7 @@ import java.util.HashMap;
 public class ImageActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private final int PICK_FROM_FILE = 0x1;
+    private String subject, chapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +30,8 @@ public class ImageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_image);
         // get title and subject
         Intent intent = getIntent();
-        String subject = intent.getStringExtra("subject");
-        String chapter = intent.getStringExtra("title");
+        subject = intent.getStringExtra("subject");
+        chapter = intent.getStringExtra("title");
         setTitle(chapter);
         // query images
         DataHelper dataHelper = new DataHelper(this);
@@ -113,15 +115,39 @@ public class ImageActivity extends AppCompatActivity {
         if (requestCode == PICK_FROM_FILE) {
             if (resultCode == RESULT_OK) {
                 Uri selectedImage = data.getData();
-                // String filePath = new File(selectedImage.getPath()).getAbsolutePath();
                 Bitmap bitmap = null;
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                Findpoint points = new Findpoint();
-                points.FindPoint(bitmap);
+                Findpoint findpoint = new Findpoint();
+                findpoint.FindPoint(bitmap);
+                // insert image
+                DataHelper dataHelper = new DataHelper(getApplicationContext());
+                ContentValues contentValues = new ContentValues();
+                contentValues.put("subject_fk", subject);
+                contentValues.put("chapter_fk", chapter);
+                contentValues.put("image", findpoint.Bitmap2Bytes(bitmap));
+                long imgeId = dataHelper.getWritableDatabase()
+                        .insert("image", null, contentValues);
+                // insert points
+                HashMap<Point.Color, String> convertToType = new HashMap<>();
+                convertToType.put(Point.Color.Black, "Theorem");
+                convertToType.put(Point.Color.Blue, "Definition");
+                convertToType.put(Point.Color.Red, "Example");
+                ArrayList<Point> points = findpoint.pointlist;
+                for (Point point : points) {
+                    contentValues = new ContentValues();
+                    contentValues.put("image_fk", imgeId);
+                    contentValues.put("x", point.getX());
+                    contentValues.put("y", point.getY());
+                    contentValues.put("width", point.getWidth());
+                    contentValues.put("height", point.getHeight());
+                    contentValues.put("type", convertToType.get(point.getColor()));
+                    dataHelper.getWritableDatabase()
+                            .insert("note", null, contentValues);
+                }
             }
         }
     }
